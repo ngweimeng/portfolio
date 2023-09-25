@@ -56,13 +56,23 @@
 							</header>
                             <p>Skills: Python, Scikit-learn, Tableau</p>
                             <p>Singapore lacks a government-mandated minimum wage, relying instead on market-driven wages to incentivize productivity. This mirrors the country's deep-seated value of meritocracy. However, in 2018, Oxfam ranked Singapore 149th out of 157 nations concerning efforts to bridge the rich-poor gap, pinpointing the absence of a minimum wage as a causative factor. This sparked debates on whether a minimum wage is essential to combat inequality. Despite public calls for wage protection, Singapore remains firm against such policies, promoting the Progressive Wage Model to encourage skill upgrades and higher responsibilities. The 2020 elections amplified this conversation, with opposition parties like the Workers Party suggesting a $1,300 monthly wage. Critics argue this challenges meritocracy and risks automation of low-skill jobs. While we don't aim to persuade, it's crucial to recognize that for many, poverty isn't a choice, and wage significantly influences one's living standard.</p>
-                            <p>Please see code availiable <a href="https://nbviewer.org/github/ngweimeng/Web-Scraping-MySQL-Database/blob/main/webscraping%20into%20MySQL%20database.ipynb"> here</a>.</p>
-                            <section class= "image.main">
-                                <img src="images/eurusd/trend rates.png" alt="">
-                                <img src="images/eurusd/box plot.png" alt="">
-                                <img src="images/eurusd/point plot.png" alt="">
-                                <img src="images/eurusd/kernal density plot.png" alt="">
-                            </section>
+                           	<p>While we might not be economists, we're intrigued by the potential impact of minimum wage on society's most vulnerable members. Singapore's former Prime Minister, Mr. Lee Kwan Yew, championed a meritocratic system, urging Singaporeans to strive through hard work. This ethos transformed Singapore rapidly, but also spurred debates about the causes of poverty. Instead of associating words like "lazy" or "incompetent" with poverty, it's crucial to recognize the complexities behind it. Poverty, often a cyclic challenge, hinges significantly on wages. When earnings don't cover essentials, it pushes individuals below the poverty threshold. </p>
+							<p>In our analysis, we collected data from Wikipedia and World Data, focusing on minimum wage, cost of living, and quality of life metrics of 90 countries. The quality of life index encapsulated key areas such as Stability, Rights, Health, Safety, Climate, Costs, and Popularity. We utilized a linear regression model to analyze these indicators, specifically employing Singapore's statistics as benchmarks. This model, crafted using Python's sklearn library, aimed to predict Singapore’s minimum wage. Our model estimated Singapore's annual minimum wage at US$27,109.85 (SG$3088.47 per month). A comparative glimpse is presented in the ensuing graph. </p>
+							<section class= "image.main">
+                                <img src="images/minwage_image/Annual Min Wage against GDP.png" width="800" height="500" alt="">
+                                <img src="images/minwage_image/Annual Min Wage against Cost of Living.png" width="800" height="500" alt="">
+							</section>
+							<p>To better understand the variables affecting Minimum Wage, I will incorporate a stepwise regression to identify variables that are statistically significant. (Stepwise regression identifies key factors influencing an outcome by eliminating insignificant variables. In this method, variables with high p-values, which don't significantly improve prediction accuracy, are removed. For this case, I will deploy backwards elimination approach, where all variables start included, and the least impactful one is discarded iteratively until only significant factors remain.)</p>
+							<p>Using the "statmodels.api" library, I created a function which grabs varaibles, and fits them into an ordinary least squares linear model. The statistics summary is then printed out, as shown below.</p>
+							<section class= "image.main">
+                                <img src="images/minwage_image/Screenshot 2023-09-25 at 11.42.22 AM.png" width="800" height="500" alt="">
+							</section>
+							<p>The "P > |t|" column indicates the p-value for testing the null hypothesis. Using the assumption that coefficients with p-values below 0.05 are statistically significant (therefore suggesting a meaningful impact), I will exclude the variable, with the highest p-value (in this case will be "Work hours/week") since it isn't statistically significant. I will repeat this process until all p-values are below 0.5 (See below).</p>
+							<section class= "image.main">
+                                <img src="images/minwage_image/sig stats model.png" width="800" height="500" alt="">
+							</section>
+							<p>Finally, we find that there are 6 variables left, namely GDP per Capita, Stability, Health, Safety, Costs and Cost of Living Index. Since each of the p-values are below 0.05, all of these variables are said to be statistically significant. Using this new set of variables, a linear model is produced to predict Singapore’s minimum wage. The updated Annual Minimum Wage is USD$27,848.98 (SGD$3172.68 per month).</p>
+							<p>Please see code availiable <a href="https://nbviewer.org/github/ngweimeng/sgminwage/blob/main/Calculating%20SG%20minimum%20wage.ipynb"> here</a>.</p>
                         </div>   
 					</div>
 
